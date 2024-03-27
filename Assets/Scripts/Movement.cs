@@ -7,7 +7,7 @@ public abstract class Movement : MonoBehaviour
     [SerializeField] protected Rigidbody2D _rb;
 	[SerializeField] protected MovementData _moveData;
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
 		float targetSpeed = GetDirection() * _moveData.MaxSpeed;
 

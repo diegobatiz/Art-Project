@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f976b10a31d90b4d8a5d062e34d57da, type: 3}
+  m_Name: Player Jump
+  m_EditorClassIdentifier: 
+  _jumpHeight: 3
+  _jumpTime: 0.5
+  FallFasterGravityFactor: 2
+  EarlyExitGravityFactor: 3
+  MaxJumpBufferTime: 0.2
+  MaxCoyoteTime: 0.11
+  GravityScaleFactor: 2.4464831
+  JumpGravity: -24
+  InitJumpSpeed: 12
