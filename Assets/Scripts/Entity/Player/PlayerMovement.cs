@@ -7,6 +7,7 @@ public class PlayerMovement : Movement
 {
     [SerializeField] private GroundCheck _groundCheck;
     [SerializeField] private JumpData _jumpData;
+    [SerializeField] private float _maxFallSpeed;
  
     private bool _canJump;
     private float _jumpBufferTime;
@@ -15,8 +16,9 @@ public class PlayerMovement : Movement
     float _direction;
     float _jumpInput;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _rb.gravityScale = _jumpData.GravityScaleFactor;
     }
 
@@ -49,6 +51,11 @@ public class PlayerMovement : Movement
         else
         {
             JumpUpdate();
+        }
+
+        if (_rb.velocity.y < -_maxFallSpeed)
+        {
+            _rb.velocity = new Vector2(_rb.velocity.x, -_maxFallSpeed);
         }
 
         if (_jumpInput == 0f)

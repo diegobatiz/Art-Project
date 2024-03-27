@@ -16,8 +16,8 @@ MonoBehaviour:
   _jumpTime: 0.5
   FallFasterGravityFactor: 2
   EarlyExitGravityFactor: 3
-  MaxJumpBufferTime: 0.2
-  MaxCoyoteTime: 0.11
+  MaxJumpBufferTime: 0.1
+  MaxCoyoteTime: 0.1
   GravityScaleFactor: 2.4464831
   JumpGravity: -24
   InitJumpSpeed: 12
