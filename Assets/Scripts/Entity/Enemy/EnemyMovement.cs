@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyMovement : Movement
 {
-    private float direction = 1f;
+    public float Direction { get; private set; } = 1f;
 
     protected override float GetDirection()
     {
@@ -14,7 +14,7 @@ public class EnemyMovement : Movement
         }
         else
         {
-            return direction;
+            return Direction;
         }
     }
 
@@ -27,7 +27,7 @@ public class EnemyMovement : Movement
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
-            direction *= -1f;
+            Direction *= -1f;
         }
     }
 

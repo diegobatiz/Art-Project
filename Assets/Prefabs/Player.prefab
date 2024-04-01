@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4487662791670011899}
   - component: {fileID: 4487662791670011892}
   - component: {fileID: 4487662791670011898}
-  - component: {fileID: 5414073946409065395}
+  - component: {fileID: 1217175707}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -154,7 +154,7 @@ MonoBehaviour:
   _groundCheck: {fileID: 4487662791082901462}
   _jumpData: {fileID: 11400000, guid: 88604a16e70457a48bd0faca33b5e9a5, type: 2}
   _maxFallSpeed: 20
---- !u!114 &5414073946409065395
+--- !u!114 &1217175707
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,10 +163,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 148290759917208542}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3347d31f5b3877647a6af046f0df0836, type: 3}
+  m_Script: {fileID: 11500000, guid: b4c3461c1ef48844fbe765769c37ce96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 30
+  _respawnPoint: {x: 0, y: 3, z: 0}
 --- !u!1 &4487662791082901456
 GameObject:
   m_ObjectHideFlags: 0
