@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 639afdc59871baa45884b68cc32c6c59, type: 3}
   m_Name: Basic Enemy Move
   m_EditorClassIdentifier: 
-  MaxSpeed: 3
+  MaxSpeed: 0.1
   Acceleration: 1
-  AccelAmount: 16.666666
+  AccelAmount: 500
   Deceleration: 1
-  DecelAmount: 16.666666
+  DecelAmount: 500

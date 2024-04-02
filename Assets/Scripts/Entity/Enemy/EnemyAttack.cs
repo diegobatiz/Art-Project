@@ -4,23 +4,30 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
+    [SerializeField] private Player _player;
     [SerializeField] private float _damage;
     [SerializeField] private float _knockbackForce;
+    [SerializeField] private float _airKnockbackForce;
+    private float _knockbackDir;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<Health>().Damage(_damage);
-            Vector2 direction = collision.GetContact(0).normal;
-            if (direction.y > 0.5f)
+            Vector3 collisionPoint = collision.ClosestPoint(transform.position);
+            Vector3 collisionNormal = transform.position - collisionPoint;
+            if (collisionNormal.x > 0)
             {
-                collision.rigidbody.AddForce(new Vector2(0f, direction.y * _knockbackForce));
+                _knockbackDir = -1f;
             }
             else
             {
-                collision.rigidbody.AddForce(new Vector2(-direction.x * _knockbackForce, 0f));
+                _knockbackDir = 1f;
             }
+
+            collision.attachedRigidbody.velocity = Vector2.zero;
+            collision.attachedRigidbody.AddForce(new Vector2(_knockbackDir * _knockbackForce, _airKnockbackForce));
         }
     }
 }
