@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 742104035520394063}
   - component: {fileID: 3892745676269791074}
   - component: {fileID: 742104035520394062}
+  - component: {fileID: 684185218}
   m_Layer: 7
   m_Name: Basic Enemy
   m_TagString: Untagged
@@ -181,6 +182,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 3892745676269791074}
   _moveData: {fileID: 11400000, guid: bf70f6d2de007f44299c353a498d08cf, type: 2}
+--- !u!114 &684185218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5316230871300276805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f8e06fc59645374c82c2824f94f8757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 30
 --- !u!1 &8748077379309655405
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,7 +266,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c67b79fb979091d428db773e6ed3e9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
   _damage: 10
   _knockbackForce: 1400
   _airKnockbackForce: 650
