@@ -14,7 +14,8 @@ public class EnemyAttack : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<Health>().Damage(_damage);
+            IHealth player = collision.gameObject.GetComponent<IHealth>();
+            player.Damage(_damage);
             Vector3 collisionPoint = collision.ClosestPoint(transform.position);
             Vector3 collisionNormal = transform.position - collisionPoint;
             if (collisionNormal.x > 0)
