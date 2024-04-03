@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private bool _isAttacking = false;
+    public bool IsAttacking { get; private set; } = false;
 
     [SerializeField] private Transform _attackPoint;
     [SerializeField] private Vector2 _attackSize;
@@ -17,6 +17,7 @@ public class PlayerAttack : MonoBehaviour
     [Header("DEBUG")]
     [SerializeField] private GameObject _sprite;
 
+    private List<Collider2D> _hitObjects;
     private float _knockbackDir;
     private Timer _timer;
 
@@ -24,16 +25,24 @@ public class PlayerAttack : MonoBehaviour
     {
         _timer = new Timer(_attackDuration);
         _timer.OnTimerEnd += EndAttack;
+        _hitObjects = new List<Collider2D>();
     }
 
     private void Update()
     {
-        if (_isAttacking)
+        if (IsAttacking)
         {
             Collider2D[] collisions = Physics2D.OverlapCapsuleAll(_attackPoint.position, _attackSize, CapsuleDirection2D.Horizontal, 0, _layerMask);
 
             foreach(var collision in collisions)
             {
+                if (_hitObjects.Contains(collision))
+                {
+                    continue;
+                }
+
+                _hitObjects.Add(collision);
+
                 IHealth damageable = collision.GetComponent<IHealth>();
 
                 damageable.Damage(_attackDamage);
@@ -59,19 +68,20 @@ public class PlayerAttack : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {
-        if (_isAttacking)
+        if (IsAttacking)
         {
             return;
         }
 
         _sprite.SetActive(true);
-        _isAttacking = true;
+        IsAttacking = true;
     }
 
     private void EndAttack()
     {
         _sprite.SetActive(false);
-        _isAttacking = false;
+        IsAttacking = false;
         _timer.ResetTimer();
+        _hitObjects.Clear();
     }
 }

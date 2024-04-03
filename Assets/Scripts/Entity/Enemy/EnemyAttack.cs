@@ -1,10 +1,9 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    [SerializeField] private Player _player;
     [SerializeField] private float _damage;
     [SerializeField] private float _knockbackForce;
     [SerializeField] private float _airKnockbackForce;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : Movement
 {
+    [SerializeField] private Player _player;
     [SerializeField] private GroundCheck _groundCheck;
     [SerializeField] private JumpData _jumpData;
     [SerializeField] private float _maxFallSpeed;
@@ -13,14 +15,19 @@ public class PlayerMovement : Movement
     private bool _canJump;
     private float _jumpBufferTime;
     private float _coyoteTime;
+    private float _gravityScale;
 
     private float _direction;
     private float _jumpInput;
 
+    public Action<bool> IsAttacking;
+
     protected override void Awake()
     {
         base.Awake();
-        _rb.gravityScale = _jumpData.GravityScaleFactor;
+        _gravityScale = _rb.gravityScale;
+
+        _player.OnDamaged(EndJump);
     }
 
     private void Update()
@@ -93,8 +100,7 @@ public class PlayerMovement : Movement
 
         if (IsGrounded() && _rb.velocity.y <= 0.0f)
         {
-            IsJumping = false;
-            _rb.gravityScale = _jumpData.GravityScaleFactor;
+            EndJump();
         }
     }
 
@@ -103,14 +109,39 @@ public class PlayerMovement : Movement
         return _groundCheck.IsGrounded();
     }
 
+    public void EndJump()
+    {
+        IsJumping = false;
+        _rb.gravityScale = _gravityScale;
+    }
+
     protected override float GetDirection()
     {
         return _direction;
     }
 
+    protected override void Flip(int dir)
+    {
+        transform.localScale = new Vector3(dir, 1f, 1f);
+    }
+
     public void MoveInput(InputAction.CallbackContext context)
     {
         _direction = context.ReadValue<float>();
+
+        if (_player?.IsAttacking() != false)
+        {
+            return;
+        }
+
+        if (_rb.velocity.x > 0f)
+        {
+            Flip(1);
+        }
+        else if (_rb.velocity.x < 0f)
+        {
+            Flip(-1);
+        }
     }
 
     public void JumpInput(InputAction.CallbackContext context)

@@ -37,4 +37,9 @@ public class ChargeEnemy : Movement
             Direction *= -1f;
         }
     }
+
+    protected override void Flip(int dir)
+    {
+        return ;
+    }
 }

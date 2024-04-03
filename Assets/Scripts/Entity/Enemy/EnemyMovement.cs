@@ -18,4 +18,9 @@ public class EnemyMovement : Movement
             _direction *= -1f;
         }
     }
+
+    protected override void Flip(int dir)
+    {
+       
+    }
 }

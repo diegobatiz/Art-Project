@@ -32,4 +32,5 @@ public abstract class Movement : MonoBehaviour
 
 	protected abstract float GetDirection();
 
+	protected abstract void Flip(int dir);
 }

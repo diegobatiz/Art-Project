@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,12 +8,14 @@ public class PlayerHealth : MonoBehaviour, IHealth
     [SerializeField] private float _maxHealth;
     [SerializeField] private Vector3 _respawnPoint;
 
+    public event Action OnDamaged;
+
     private void Awake()
     {
         _health = _maxHealth;
     }
 
-    public bool Damage(float amt)
+    public void Damage(float amt)
     {
         _health -= amt;
         if (_health <= 0f)
@@ -21,7 +23,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
             Death();
         }
 
-        return true;
+        OnDamaged?.Invoke();
     }
 
     public void Death()
