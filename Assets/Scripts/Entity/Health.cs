@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IHealth
 {
-    void Damage(float amt);
+    bool Damage(float amt);
 
     void Death();
 }

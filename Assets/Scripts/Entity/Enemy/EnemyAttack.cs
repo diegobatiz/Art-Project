@@ -9,12 +9,15 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] private float _airKnockbackForce;
     private float _knockbackDir;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             IHealth player = collision.gameObject.GetComponent<IHealth>();
-            player.Damage(_damage);
+            if (!player.Damage(_damage))
+            {
+                return;
+            }
             Vector3 collisionPoint = collision.ClosestPoint(transform.position);
             Vector3 collisionNormal = transform.position - collisionPoint;
             if (collisionNormal.x > 0)

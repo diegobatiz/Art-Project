@@ -7,28 +7,55 @@ public class PlayerHealth : MonoBehaviour, IHealth
     private float _health;
     [SerializeField] private float _maxHealth;
     [SerializeField] private Vector3 _respawnPoint;
+    [SerializeField] private float _invincTime;
 
-    public event Action OnDamaged;
+    private bool _wasDamaged;
+    private Timer _invincibilityTimer;
+
+    public event Action<float> OnDamaged;
 
     private void Awake()
     {
         _health = _maxHealth;
+        _invincibilityTimer = new Timer(_invincTime);
+        _invincibilityTimer.OnTimerEnd += ResetTimer;
     }
 
-    public void Damage(float amt)
+    private void Update()
     {
+        if (_wasDamaged)
+        {
+            _invincibilityTimer.Tick(Time.deltaTime);
+        }
+    }
+
+    public bool Damage(float amt)
+    {
+        if (_wasDamaged)
+        {
+            return false;
+        }
+
+        _wasDamaged = true;
         _health -= amt;
         if (_health <= 0f)
         {
             Death();
         }
 
-        OnDamaged?.Invoke();
+        OnDamaged?.Invoke(amt);
+        return true;
     }
 
     public void Death()
     {
         _health = _maxHealth;
         transform.position = _respawnPoint;
+    }
+
+    private void ResetTimer()
+    {
+        _invincibilityTimer.ResetTimer();
+        _wasDamaged = false;
     }
 }

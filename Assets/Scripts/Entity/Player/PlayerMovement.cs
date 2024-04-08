@@ -20,8 +20,6 @@ public class PlayerMovement : Movement
     private float _direction;
     private float _jumpInput;
 
-    public Action<bool> IsAttacking;
-
     protected override void Awake()
     {
         base.Awake();
@@ -84,6 +82,11 @@ public class PlayerMovement : Movement
 
     private void JumpUpdate()
     {
+        if (!IsJumping)
+        {
+            return;
+        }
+
         if (_jumpInput == 0f && _rb.velocity.y > 0f)
         {
             _rb.gravityScale = _jumpData.GravityScaleFactor * _jumpData.EarlyExitGravityFactor;
@@ -100,7 +103,7 @@ public class PlayerMovement : Movement
 
         if (IsGrounded() && _rb.velocity.y <= 0.0f)
         {
-            EndJump();
+            EndJump(0);
         }
     }
 
@@ -109,7 +112,7 @@ public class PlayerMovement : Movement
         return _groundCheck.IsGrounded();
     }
 
-    public void EndJump()
+    public void EndJump(float amt)
     {
         IsJumping = false;
         _rb.gravityScale = _gravityScale;
@@ -134,13 +137,10 @@ public class PlayerMovement : Movement
             return;
         }
 
-        if (_rb.velocity.x > 0f)
+        int flip = (int)_direction;
+        if (flip != 0)
         {
-            Flip(1);
-        }
-        else if (_rb.velocity.x < 0f)
-        {
-            Flip(-1);
+            Flip(flip);
         }
     }
 

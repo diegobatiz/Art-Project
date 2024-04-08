@@ -17,6 +17,7 @@ public class PlayerAttack : MonoBehaviour
     [Header("DEBUG")]
     [SerializeField] private GameObject _sprite;
 
+    private bool _canAttack;
     private List<Collider2D> _hitObjects;
     private float _knockbackDir;
     private Timer _timer;
@@ -68,13 +69,21 @@ public class PlayerAttack : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {
-        if (IsAttacking)
+        float attack = context.ReadValue<float>();
+
+        if (attack == 0.0f)
+        {
+            _canAttack = true;
+        }
+
+        if (IsAttacking || !_canAttack)
         {
             return;
         }
 
         _sprite.SetActive(true);
         IsAttacking = true;
+        _canAttack = false;
     }
 
     private void EndAttack()

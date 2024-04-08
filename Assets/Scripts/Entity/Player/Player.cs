@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
         return _attack.IsAttacking;
     }
 
-    public void OnDamaged(Action action)
+    public void OnDamaged(Action<float> action)
     {
         _health.OnDamaged += action;
     }

@@ -12,13 +12,14 @@ public class EnemyHealth : MonoBehaviour, IHealth
         _health = _maxHealth;
     }
 
-    public void Damage(float amt)
+    public bool Damage(float amt)
     {
         _health -= amt;
         if (_health <= 0f)
         {
             Death();
         }
+        return true;
     }
 
     public void Death()
