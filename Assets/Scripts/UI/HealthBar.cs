@@ -15,6 +15,6 @@ public class HealthBar : MonoBehaviour
 
     private void UpdateHealthBar(float damage)
     {
-        _healthFill.fillAmount -= damage;
+        _healthFill.fillAmount -= damage * 0.01f;
     }
 }
