@@ -120,6 +120,17 @@ public class PlayerMovement : Movement
 
     protected override float GetDirection()
     {
+        if (_player?.IsAttacking() != false)
+        {
+            return _direction;
+        }
+
+        int flip = (int)_direction;
+        if (flip != 0)
+        {
+            Flip(flip);
+        }
+
         return _direction;
     }
 
@@ -131,17 +142,6 @@ public class PlayerMovement : Movement
     public void MoveInput(InputAction.CallbackContext context)
     {
         _direction = context.ReadValue<float>();
-
-        if (_player?.IsAttacking() != false)
-        {
-            return;
-        }
-
-        int flip = (int)_direction;
-        if (flip != 0)
-        {
-            Flip(flip);
-        }
     }
 
     public void JumpInput(InputAction.CallbackContext context)
