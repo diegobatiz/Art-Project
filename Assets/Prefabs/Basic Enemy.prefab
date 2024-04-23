@@ -268,4 +268,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 10
   _knockbackForce: 1400
-  _airKnockbackForce: 650
+  _airKnockbackForce: 700

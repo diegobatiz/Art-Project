@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f976b10a31d90b4d8a5d062e34d57da, type: 3}
   m_Name: Player Jump
   m_EditorClassIdentifier: 
-  _jumpHeight: 3
-  _jumpTime: 0.5
+  _jumpHeight: 2.6
+  _jumpTime: 0.45
   FallFasterGravityFactor: 2
   EarlyExitGravityFactor: 3
   MaxJumpBufferTime: 0.1
   MaxCoyoteTime: 0.1
-  GravityScaleFactor: 2.4464831
-  JumpGravity: -24
-  InitJumpSpeed: 12
+  GravityScaleFactor: 2.6176362
+  JumpGravity: -25.679012
+  InitJumpSpeed: 11.555555

@@ -7,6 +7,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private Transform _player;
     [SerializeField] private List<Transform> _extents;
     [SerializeField] private float _smoothTime;
+    [SerializeField] private float _zoom;
 
     private List<float> _extentPositions = new List<float>(4);
     private float _aspect;
@@ -38,7 +39,7 @@ public class CameraManager : MonoBehaviour
     {
         Vector3 newPos = new Vector3();
         newPos = _player.position;
-        newPos.z = -10;
+        newPos.z = _zoom;
 
         if (newPos.y >= _extentPositions[0])
         {
