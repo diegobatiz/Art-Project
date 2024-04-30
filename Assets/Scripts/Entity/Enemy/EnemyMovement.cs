@@ -13,7 +13,10 @@ public class EnemyMovement : Movement
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+       // if (collision.gameObject.CompareTag("Wall"))
+      ///  {
+       //     _direction *= -1f;
+       // }
     }
 
     protected override void Flip(int dir)
