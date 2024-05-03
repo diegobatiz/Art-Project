@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 639afdc59871baa45884b68cc32c6c59, type: 3}
-  m_Name: EnemyCharge
+  m_Name: FlyData
   m_EditorClassIdentifier: 
-  MaxSpeed: 9
-  Acceleration: 2
-  AccelAmount: 11.111111
-  Deceleration: 2
-  DecelAmount: 11.111111
+  MaxSpeed: 3
+  Acceleration: 0.5
+  AccelAmount: 8.333333
+  Deceleration: 0.25
+  DecelAmount: 4.1666665

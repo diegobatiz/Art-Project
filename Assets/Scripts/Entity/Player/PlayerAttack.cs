@@ -59,7 +59,7 @@ public class PlayerAttack : MonoBehaviour
                     _knockbackDir = 1f;
                 }
 
-                collision.attachedRigidbody.AddForce(new Vector2(_knockbackDir * _knockbackForce, 0));
+                collision.attachedRigidbody?.AddForce(new Vector2(_knockbackDir * _knockbackForce, 0));
 
             }
 

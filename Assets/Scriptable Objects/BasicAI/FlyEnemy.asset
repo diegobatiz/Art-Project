@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 639afdc59871baa45884b68cc32c6c59, type: 3}
-  m_Name: EnemyCharge
+  m_Script: {fileID: 11500000, guid: 7de125eacbd084f46897ee51b84e4076, type: 3}
+  m_Name: FlyEnemy
   m_EditorClassIdentifier: 
-  MaxSpeed: 9
-  Acceleration: 2
-  AccelAmount: 11.111111
-  Deceleration: 2
-  DecelAmount: 11.111111
+  Range: 7
+  LayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  FocusDuration: 3
