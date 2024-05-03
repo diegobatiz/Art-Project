@@ -160,7 +160,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3767948854903566376, guid: ce915ec302eac1f4a9ee09c1b7f73db2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3767948854903566376, guid: ce915ec302eac1f4a9ee09c1b7f73db2, type: 3}
       propertyPath: m_LocalRotation.x
@@ -168,7 +168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3767948854903566376, guid: ce915ec302eac1f4a9ee09c1b7f73db2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3767948854903566376, guid: ce915ec302eac1f4a9ee09c1b7f73db2, type: 3}
       propertyPath: m_LocalRotation.z
@@ -180,7 +180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3767948854903566376, guid: ce915ec302eac1f4a9ee09c1b7f73db2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 3767948854903566376, guid: ce915ec302eac1f4a9ee09c1b7f73db2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -269,5 +269,5 @@ MonoBehaviour:
   _chargeData: {fileID: 11400000, guid: d9a3631f5fabdd742a02dc1bcbcc7fdd, type: 2}
   _aiData: {fileID: 11400000, guid: 48df8ec5d2fa1094d9dea6d086dc5955, type: 2}
   _castPoint: {fileID: 1235072396188520770}
-  _pauseDuration: 0.2
+  _pauseDuration: 1
   _chargeDuration: 2

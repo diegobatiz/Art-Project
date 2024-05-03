@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de125eacbd084f46897ee51b84e4076, type: 3}
   m_Name: BasicEnemyAI
   m_EditorClassIdentifier: 
-  Range: 4
+  Range: 8.5
   LayerMask:
     serializedVersion: 2
     m_Bits: 64

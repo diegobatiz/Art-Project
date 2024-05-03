@@ -34,7 +34,7 @@ public class ChargeEnemy : Movement
 
     protected override float GetDirection()
     {
-        if (!_startPause && _ai.DetectPlayer())
+        if (!_startPause && _ai.DetectPlayerCheck())
         {
             Debug.Log("Player Detected");
             _pauseTimer.ResetTimer();
@@ -72,6 +72,7 @@ public class ChargeEnemy : Movement
     private void OnChargeTimerEnd()
     {
         Debug.Log("Charge Ended");
+        _chargeTimer.ResetTimer();
         _maxSpeed = _moveData.MaxSpeed;
         _accelAmount = _moveData.AccelAmount;
         _decelAmount = _moveData.DecelAmount;

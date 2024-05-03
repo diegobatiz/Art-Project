@@ -27,13 +27,34 @@ public class EnemyAI
         _seeTargetTimer.OnTimerEnd += LoseTarget;
     }
 
-    public bool DetectPlayer()
+    public bool DetectPlayerCheck()
     {
-        Vector2 endPos = _enemyPos.position + (_enemyPos.right * _sightRange);
+        Vector2 endPos = _raycastPoint.position + (_enemyPos.right * _sightRange);
 
-        RaycastHit2D raycast = Physics2D.Linecast(_enemyPos.position, endPos, _layerMask);
+        RaycastHit2D raycast = Physics2D.Linecast(_raycastPoint.position, endPos, _layerMask);
 
-        Debug.DrawRay(_enemyPos.position, endPos, Color.yellow);
+        Debug.DrawLine(_raycastPoint.position, endPos, Color.yellow);
+
+        if (raycast.collider != null)
+        {
+            float colliderPos = raycast.collider.ClosestPoint(_enemyPos.position).x;
+            PlayerDirection = colliderPos > _raycastPoint.position.x ? 1 : -1;
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool DetectPlayerContinue()
+    {
+        Vector2 endPos = _raycastPoint.position + (_enemyPos.right * _sightRange);
+
+        RaycastHit2D raycast = Physics2D.Linecast(_raycastPoint.position, endPos, _layerMask);
+
+        Debug.DrawLine(_raycastPoint.position, endPos, Color.yellow);
 
         if (raycast.collider != null)
         {
