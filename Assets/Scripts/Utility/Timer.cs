@@ -15,7 +15,7 @@ public class Timer
 
     public void Tick(float deltaTime)
     {
-        if (RemainingSeconds == 0f)
+        if (RemainingSeconds <= 0f)
         {
             return;
         }
@@ -40,5 +40,12 @@ public class Timer
     public void ResetTimer()
     {
         RemainingSeconds = _duration;
+    }
+
+    public void EndTimer()
+    {
+        RemainingSeconds = 0f;
+
+        OnTimerEnd?.Invoke();
     }
 }

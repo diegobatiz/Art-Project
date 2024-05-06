@@ -12,7 +12,7 @@ public class EnemyAI
     private Timer _seeTargetTimer;
     private float _focusTime;
 
-    public bool SeePlayer { get; private set; }
+    public bool SeePlayer { get; set; }
     public float PlayerDirection;
 
     public EnemyAI(float range, Transform ray, Transform enemy, LayerMask mask, float focusTime = 1.0f)

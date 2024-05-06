@@ -125,7 +125,7 @@ public class PlayerMovement : Movement
             return _direction;
         }
 
-        int flip = (int)_direction;
+        float flip = (int)_direction;
         if (flip != 0)
         {
             Flip(flip);
@@ -134,7 +134,7 @@ public class PlayerMovement : Movement
         return _direction;
     }
 
-    protected override void Flip(int dir)
+    protected override void Flip(float dir)
     {
         transform.localScale = new Vector3(dir, 1f, 1f);
     }
