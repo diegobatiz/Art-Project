@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class EnemyMovement : Movement
 {
+    public bool CanWalk { get; set; } = true;
     private float _direction = 1f;
+
+    private void SetDirection(float direction)
+    {
+        _direction = direction;
+    }
 
     protected override float GetDirection()
     {
-        Debug.Log(_direction);
+        if (!CanWalk)
+        {
+            return 0.0f;
+        }
         return _direction;
     }
 

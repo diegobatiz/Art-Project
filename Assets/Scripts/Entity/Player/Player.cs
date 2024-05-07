@@ -22,4 +22,14 @@ public class Player : MonoBehaviour
     {
         _health.OnDamaged += action;
     }
+
+    public static void PauseMovement()
+    {
+        PlayerMovement.PauseMovement = true;
+    }
+
+    public static void UnpauseMovement()
+    {
+        PlayerMovement.PauseMovement = false;
+    }
 }

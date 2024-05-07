@@ -11,6 +11,7 @@ public class PlayerMovement : Movement
     [SerializeField] private JumpData _jumpData;
     [SerializeField] private float _maxFallSpeed;
  
+    public static bool PauseMovement { get; set; }
     public bool IsJumping { get; private set; }
     private bool _canJump;
     private float _jumpBufferTime;
@@ -30,6 +31,14 @@ public class PlayerMovement : Movement
 
     private void Update()
     {
+        if (PauseMovement)
+        {
+            IsJumping = false;
+            _rb.gravityScale = _gravityScale;
+            return;
+        }
+
+
         if (IsGrounded())
         {
             _coyoteTime = _jumpData.MaxCoyoteTime;
@@ -120,6 +129,11 @@ public class PlayerMovement : Movement
 
     protected override float GetDirection()
     {
+        if (PauseMovement)
+        {
+            return 0.0f;
+        }
+
         if (_player?.IsAttacking() != false)
         {
             return _direction;
