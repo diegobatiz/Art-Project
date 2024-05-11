@@ -21,13 +21,15 @@ public class RhinoWalk : IState<RhinoBoss>
         {
             _rhino = agent;
             _rhinoMove = agent.GetComponent<EnemyMovement>();
-
             _walkTimer.OnTimerEnd += EnterAttackState;
-            _walkTimer = new Timer(_stateTime);
+            _maxTime = _rhino.MaxWalkTime;
+            _minTime = _rhino.MinWalkTime;
+
             _hasBeenEntered = true;
         }
 
-        //SET THE WALK DIRECTION TO EITHER 1 or -1
+        int direction = _rhino.FindPlayer().x > _rhino.transform.position.x ? 1 : -1;
+        _rhinoMove.SetDirection(direction);
 
         _stateTime = Random.Range(_minTime, _maxTime);
         _walkTimer = new Timer(_stateTime);
@@ -36,7 +38,6 @@ public class RhinoWalk : IState<RhinoBoss>
 
     public void Exit(RhinoBoss agent)
     {
-
         _rhinoMove.CanWalk = false;
     }
 
@@ -47,7 +48,13 @@ public class RhinoWalk : IState<RhinoBoss>
 
     private void EnterAttackState()
     {
-
+        if (Vector2.Distance(_rhino.FindPlayer(), _rhino.transform.position) > 3)
+        {
+            _rhino.ChangeState(RhinoState.ShortAttack);
+            return;
+        }
+        int nextState = Random.Range(2, 4);
+        _rhino.ChangeState((RhinoState)nextState);
     }
 }
 

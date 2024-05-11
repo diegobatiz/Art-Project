@@ -7,7 +7,7 @@ public class EnemyMovement : Movement
     public bool CanWalk { get; set; } = true;
     private float _direction = 1f;
 
-    private void SetDirection(float direction)
+    public void SetDirection(float direction)
     {
         _direction = direction;
     }

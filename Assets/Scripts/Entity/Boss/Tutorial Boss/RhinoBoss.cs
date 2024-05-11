@@ -13,13 +13,20 @@ public enum RhinoState
     None
 };
 
-public class RhinoBoss : MonoBehaviour
+public class RhinoBoss : MonoBehaviour, IBoss
 {
     private StateMachine<RhinoBoss> _stateMachine;
     private RhinoState _currentState;
 
     [SerializeField] private Door _leftDoor;
     [SerializeField] private Door _rightDoor;
+
+    [field: SerializeField]
+    public float MaxWalkTime { get; private set; }
+    [field: SerializeField]
+    public float MinWalkTime { get; private set; }
+
+    private Player _player;
 
 
     private void Awake()
@@ -33,12 +40,15 @@ public class RhinoBoss : MonoBehaviour
         _stateMachine.AddState<RhinoCharge>();
         _stateMachine.AddState<RhinoShockwave>();
 
-        ChangeState(RhinoState.Awake);
+        ChangeState(RhinoState.None);
     }
 
     private void Update()
     {
-        _stateMachine.Update(Time.deltaTime);
+        if (_currentState != RhinoState.None)
+        {
+            _stateMachine.Update(Time.deltaTime);
+        }
     }
 
     public void ChangeState(RhinoState state)
@@ -61,5 +71,16 @@ public class RhinoBoss : MonoBehaviour
     {
         _leftDoor.Close();
         _rightDoor.Close();
+    }
+
+    public void ActivateBoss(Player player)
+    {
+        _player = player;
+        ChangeState(RhinoState.Awake);
+    }
+
+    public Vector2 FindPlayer()
+    {
+        return _player.transform.position;
     }
 }
