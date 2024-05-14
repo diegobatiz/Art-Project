@@ -55,7 +55,7 @@ public class RhinoWalk : IState<RhinoBoss>
            // _rhino.ChangeState(RhinoState.ShortAttack);
             //return;
         }
-        int nextState = 4;
+        int nextState = 3;
         _rhino.ChangeState((RhinoState)nextState);
     }
 }
@@ -71,7 +71,7 @@ public class RhinoShortAttack : IState<RhinoBoss>
         if (!_hasBeenEntered)
         {
             _hasBeenEntered = true;
-            _trigger = agent.GetAttackTrigger(1);
+            _trigger = agent.GetAttackTrigger(0);
         }
     }
 
@@ -88,27 +88,51 @@ public class RhinoShortAttack : IState<RhinoBoss>
 
 public class RhinoCharge : IState<RhinoBoss>
 {
+    private RhinoBoss _agent;
+
     private BoxCollider2D _trigger;
+
     private bool _hasBeenEntered;
+    private Timer _waitChargeTimer;
+    bool _waitCharge;
 
     public void Enter(RhinoBoss agent)
     {
         Debug.Log("Enter Charge Attack State");
         if (!_hasBeenEntered)
         {
+            _agent = agent;
             _hasBeenEntered = true;
-            _trigger = agent.GetAttackTrigger(2);
+            _trigger = agent.GetAttackTrigger(1);
+            _waitChargeTimer = new Timer(1f);
+            _waitChargeTimer.OnTimerEnd += StartCharge;
         }
+        else
+        {
+            _waitChargeTimer.ResetTimer();
+        }
+
+        _waitCharge = true;
     }
 
     public void Exit(RhinoBoss agent)
     {
-
+        agent.EndCharge();
+        _trigger.gameObject.SetActive(false);
     }
 
     public void Update(RhinoBoss agent, float deltaTime)
     {
+        if (_waitCharge)
+        {
+            _waitChargeTimer.Tick(deltaTime);
+        }
+    }
 
+    private void StartCharge()
+    {
+        _agent.StartCharge();
+        _trigger.gameObject.SetActive(true);
     }
 }
 

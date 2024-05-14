@@ -18,6 +18,13 @@ public class RhinoBoss : MonoBehaviour, IBoss
     private StateMachine<RhinoBoss> _stateMachine;
     private RhinoState _currentState;
 
+    [SerializeField] private Vector2 _knockBack;
+
+    [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] private EnemyMovement _movement;
+    [SerializeField] private MovementData _chargeData;
+    [SerializeField] private MovementData _walkData;
+
     [SerializeField] private Door _leftDoor;
     [SerializeField] private Door _rightDoor;
 
@@ -100,5 +107,27 @@ public class RhinoBoss : MonoBehaviour, IBoss
     {
         GameObject go = Instantiate(shockWave, transform);
         go.transform.localPosition = Vector3.zero;
+    }
+
+    public void StartCharge()
+    {
+        _movement.ChangeMoveData(_chargeData);
+        _movement.CanWalk = true;
+        _movement.OnHitWall += EndCharge;
+
+        int direction = FindPlayer().x > transform.position.x ? 1 : -1;
+        _movement.SetDirection(direction);
+        Debug.Log("start charge");
+    }
+
+    public void EndCharge()
+    {
+        _movement.ChangeMoveData(_walkData);
+        _movement.OnHitWall -= EndCharge;
+
+        float knockbackX = _knockBack.x * _movement.GetDir() * -1f;
+        _rb.AddForce(_knockBack.x * _movement/, );
+
+        ChangeState(RhinoState.Walk);
     }
 }
