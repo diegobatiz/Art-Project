@@ -45,15 +45,15 @@ public class RhinoWalk : IState<RhinoBoss>
     public void Update(RhinoBoss agent, float deltaTime)
     {
         _walkTimer.Tick(deltaTime);
-        Debug.Log(_walkTimer.RemainingSeconds);
+        //Debug.Log(_walkTimer.RemainingSeconds);
     }
 
     private void EnterAttackState()
     {
-        if (Vector2.Distance(_rhino.FindPlayer(), _rhino.transform.position) > 3)
+        if (Vector2.Distance(_rhino.FindPlayer(), _rhino.transform.position) < 2)
         {
-            _rhino.ChangeState(RhinoState.ShortAttack);
-            return;
+           // _rhino.ChangeState(RhinoState.ShortAttack);
+            //return;
         }
         int nextState = 4;
         _rhino.ChangeState((RhinoState)nextState);
@@ -130,6 +130,13 @@ public class RhinoShockwave : IState<RhinoBoss>
             _hasBeenEntered = true;
             _startAttackTime = new Timer(1f);
             _waitTime = new Timer(1.5f);
+            _startAttackTime.OnTimerEnd += StartAttack;
+            _waitTime.OnTimerEnd += ChangeToWalkState;
+        }
+        else
+        {
+            _startAttackTime.ResetTimer();
+            _waitTime.ResetTimer();
         }
     }
 
@@ -142,11 +149,14 @@ public class RhinoShockwave : IState<RhinoBoss>
     {
         if (!_startAttack)
         {
+            //move rhino to the center with animation
             _startAttackTime.Tick(deltaTime);
+            //Debug.Log(_startAttackTime.RemainingSeconds);
         }
         else
         {
             _waitTime.Tick(deltaTime);
+            //Debug.Log(_waitTime.RemainingSeconds);
         }
     }
 
@@ -154,5 +164,13 @@ public class RhinoShockwave : IState<RhinoBoss>
     {
         _startAttack = true;
         _agent.StartShockwave();
+        Debug.Log("Start Shockwave");
+    }
+
+    private void ChangeToWalkState()
+    {
+        _startAttack = false;
+        _agent.ChangeState(RhinoState.Walk);
+        Debug.Log("Change to walk");
     }
 }

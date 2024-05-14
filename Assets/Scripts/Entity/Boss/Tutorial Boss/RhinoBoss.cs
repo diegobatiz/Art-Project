@@ -99,5 +99,6 @@ public class RhinoBoss : MonoBehaviour, IBoss
     public void StartShockwave()
     {
         GameObject go = Instantiate(shockWave, transform);
+        go.transform.localPosition = Vector3.zero;
     }
 }
