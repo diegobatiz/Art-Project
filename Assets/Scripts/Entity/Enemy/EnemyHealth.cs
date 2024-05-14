@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +6,8 @@ public class EnemyHealth : MonoBehaviour, IHealth
 {
     [SerializeField] private float _maxHealth;
     private float _health;
+
+    public event Action<float> OnDamaged;
 
     void Awake()
     {
@@ -19,6 +21,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
         {
             Death();
         }
+        OnDamaged?.Invoke(amt);
         return true;
     }
 

@@ -21,7 +21,7 @@ public class RhinoWalk : IState<RhinoBoss>
         {
             _rhino = agent;
             _rhinoMove = agent.GetComponent<EnemyMovement>();
-            _walkTimer.OnTimerEnd += EnterAttackState;
+
             _maxTime = _rhino.MaxWalkTime;
             _minTime = _rhino.MinWalkTime;
 
@@ -33,6 +33,7 @@ public class RhinoWalk : IState<RhinoBoss>
 
         _stateTime = Random.Range(_minTime, _maxTime);
         _walkTimer = new Timer(_stateTime);
+        _walkTimer.OnTimerEnd += EnterAttackState;
         _rhinoMove.CanWalk = true;
     }
 
@@ -43,7 +44,8 @@ public class RhinoWalk : IState<RhinoBoss>
 
     public void Update(RhinoBoss agent, float deltaTime)
     {
-       
+        _walkTimer.Tick(deltaTime);
+        Debug.Log(_walkTimer.RemainingSeconds);
     }
 
     private void EnterAttackState()
@@ -53,16 +55,24 @@ public class RhinoWalk : IState<RhinoBoss>
             _rhino.ChangeState(RhinoState.ShortAttack);
             return;
         }
-        int nextState = Random.Range(2, 4);
+        int nextState = 4;
         _rhino.ChangeState((RhinoState)nextState);
     }
 }
 
 public class RhinoShortAttack : IState<RhinoBoss>
 {
+    private BoxCollider2D _trigger;
+    private bool _hasBeenEntered;
+
     public void Enter(RhinoBoss agent)
     {
-
+        Debug.Log("Enter Short Attack State");
+        if (!_hasBeenEntered)
+        {
+            _hasBeenEntered = true;
+            _trigger = agent.GetAttackTrigger(1);
+        }
     }
 
     public void Exit(RhinoBoss agent)
@@ -78,9 +88,17 @@ public class RhinoShortAttack : IState<RhinoBoss>
 
 public class RhinoCharge : IState<RhinoBoss>
 {
+    private BoxCollider2D _trigger;
+    private bool _hasBeenEntered;
+
     public void Enter(RhinoBoss agent)
     {
-
+        Debug.Log("Enter Charge Attack State");
+        if (!_hasBeenEntered)
+        {
+            _hasBeenEntered = true;
+            _trigger = agent.GetAttackTrigger(2);
+        }
     }
 
     public void Exit(RhinoBoss agent)
@@ -96,9 +114,23 @@ public class RhinoCharge : IState<RhinoBoss>
 
 public class RhinoShockwave : IState<RhinoBoss>
 {
+    private RhinoBoss _agent;
+
+    private bool _hasBeenEntered;
+    bool _startAttack = false;
+    private Timer _startAttackTime;
+    private Timer _waitTime;
+
     public void Enter(RhinoBoss agent)
     {
-
+        Debug.Log("Enter Shockwave Attack State");
+        if (!_hasBeenEntered)
+        {
+            _agent = agent;
+            _hasBeenEntered = true;
+            _startAttackTime = new Timer(1f);
+            _waitTime = new Timer(1.5f);
+        }
     }
 
     public void Exit(RhinoBoss agent)
@@ -108,6 +140,19 @@ public class RhinoShockwave : IState<RhinoBoss>
 
     public void Update(RhinoBoss agent, float deltaTime)
     {
+        if (!_startAttack)
+        {
+            _startAttackTime.Tick(deltaTime);
+        }
+        else
+        {
+            _waitTime.Tick(deltaTime);
+        }
+    }
 
+    private void StartAttack()
+    {
+        _startAttack = true;
+        _agent.StartShockwave();
     }
 }

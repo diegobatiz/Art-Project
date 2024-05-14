@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class EnemyMovement : Movement
 {
-    public bool CanWalk { get; set; } = true;
-    private float _direction = 1f;
+    [field:SerializeField] public bool CanWalk { get; set; } = true;
+    [SerializeField] private float _direction = 1f;
+    [SerializeField] private bool _destroyOnTouch = false;
 
     public void SetDirection(float direction)
     {
@@ -25,9 +26,16 @@ public class EnemyMovement : Movement
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
-            _direction *= -1f;
+            if (_destroyOnTouch)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                _direction *= -1f;
 
-            Flip(_direction);
+                Flip(_direction);
+            }
         }
     }
     protected override void Flip(float dir)

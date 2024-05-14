@@ -21,6 +21,12 @@ public class RhinoBoss : MonoBehaviour, IBoss
     [SerializeField] private Door _leftDoor;
     [SerializeField] private Door _rightDoor;
 
+    [SerializeField] private BossHealthbar _bossHealthbar;
+
+    [SerializeField] private List<BoxCollider2D> _attackTrigger;
+
+    [SerializeField] private GameObject shockWave;
+
     [field: SerializeField]
     public float MaxWalkTime { get; private set; }
     [field: SerializeField]
@@ -65,6 +71,7 @@ public class RhinoBoss : MonoBehaviour, IBoss
     public void ShowHealthBar()
     {
         Debug.Log("poof, healthbar appear");
+        _bossHealthbar.gameObject.SetActive(true);
     }
 
     public void CloseDoors()
@@ -82,5 +89,15 @@ public class RhinoBoss : MonoBehaviour, IBoss
     public Vector2 FindPlayer()
     {
         return _player.transform.position;
+    }
+
+    public BoxCollider2D GetAttackTrigger(int trigger)
+    {
+        return _attackTrigger[trigger];
+    }
+
+    public void StartShockwave()
+    {
+        GameObject go = Instantiate(shockWave, transform);
     }
 }
