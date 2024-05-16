@@ -16,6 +16,10 @@ public class EnemyMovement : Movement
 
     public void SetDirection(float direction)
     {
+        if (_direction != direction)
+        {
+            Flip(direction);
+        }
         _direction = direction;
     }
 

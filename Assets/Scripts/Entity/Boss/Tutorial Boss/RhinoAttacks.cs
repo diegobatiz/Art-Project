@@ -14,6 +14,7 @@ public class RhinoWalk : IState<RhinoBoss>
     private bool _hasBeenEntered = false;
 
     Timer _walkTimer;
+    Timer _restTimer;
 
     public void Enter(RhinoBoss agent)
     {
@@ -26,15 +27,23 @@ public class RhinoWalk : IState<RhinoBoss>
             _minTime = _rhino.MinWalkTime;
 
             _hasBeenEntered = true;
-        }
 
-        int direction = _rhino.FindPlayer().x > _rhino.transform.position.x ? 1 : -1;
-        _rhinoMove.SetDirection(direction);
+            _restTimer = new Timer(4);
+            _restTimer.OnTimerEnd += StartWalk;
+        }
+        else
+        {
+            _restTimer.ResetTimer();
+        }
 
         _stateTime = Random.Range(_minTime, _maxTime);
         _walkTimer = new Timer(_stateTime);
         _walkTimer.OnTimerEnd += EnterAttackState;
-        _rhinoMove.CanWalk = true;
+
+        if (agent.GetLastState() != RhinoState.ChargeAttack)
+        {
+            StartWalk();
+        }
     }
 
     public void Exit(RhinoBoss agent)
@@ -44,7 +53,14 @@ public class RhinoWalk : IState<RhinoBoss>
 
     public void Update(RhinoBoss agent, float deltaTime)
     {
-        _walkTimer.Tick(deltaTime);
+        if (agent.GetLastState() == RhinoState.ChargeAttack && _restTimer.RemainingSeconds > 0)
+        {
+            _restTimer.Tick(deltaTime);
+        }
+        else
+        {
+            _walkTimer.Tick(deltaTime);
+        }
         //Debug.Log(_walkTimer.RemainingSeconds);
     }
 
@@ -52,37 +68,97 @@ public class RhinoWalk : IState<RhinoBoss>
     {
         if (Vector2.Distance(_rhino.FindPlayer(), _rhino.transform.position) < 2)
         {
-           // _rhino.ChangeState(RhinoState.ShortAttack);
-            //return;
+            _rhino.ChangeState(RhinoState.ShortAttack);
+            return;
         }
-        int nextState = 3;
+        int nextState = Random.Range(2, 5);
         _rhino.ChangeState((RhinoState)nextState);
+    }
+
+    private void StartWalk()
+    {
+        int direction = _rhino.FindPlayer().x > _rhino.transform.position.x ? 1 : -1;
+        _rhinoMove.SetDirection(direction);
+        _rhinoMove.CanWalk = true;
     }
 }
 
 public class RhinoShortAttack : IState<RhinoBoss>
 {
+    private RhinoBoss _agent;
+
     private BoxCollider2D _trigger;
+    private Rigidbody2D _rb;
+
     private bool _hasBeenEntered;
+    private Timer _waitTimer;
+    private bool _wait;
+    private Timer _attackTimer;
+    private bool _attack;
+
+    private int _dir;
 
     public void Enter(RhinoBoss agent)
     {
         Debug.Log("Enter Short Attack State");
         if (!_hasBeenEntered)
         {
+            _agent = agent;
+            _rb = agent.GetRB();
             _hasBeenEntered = true;
             _trigger = agent.GetAttackTrigger(0);
+
+            _waitTimer = new Timer(0.5f);
+            _waitTimer.OnTimerEnd += StartAttack;
+
+            _attackTimer = new Timer(1f);
+            _attackTimer.OnTimerEnd += EndAttack;
         }
+        else
+        {
+            _waitTimer.ResetTimer();
+            _attackTimer.ResetTimer();
+        }
+
+        _dir = _agent.FindPlayer().x > _agent.transform.position.x ? 1 : -1;
+        _agent.SetDirecton(_dir);
+        _wait = true;
+        _attack = false;
     }
 
     public void Exit(RhinoBoss agent)
     {
-
+        _trigger.gameObject.SetActive(false);
     }
 
     public void Update(RhinoBoss agent, float deltaTime)
     {
+        if (_wait)
+        {
+            _waitTimer.Tick(deltaTime);
+        }
+        else if (_attack)
+        {
+            _attackTimer.Tick(deltaTime);
+        }
+    }
 
+    private void StartAttack()
+    {
+        _attack = true;
+        _wait = false;
+
+        _rb.velocity = Vector3.zero;
+        _rb.AddForce(new Vector2(500 * _dir, 0));
+
+        _trigger.gameObject.SetActive(true);
+    }
+
+    private void EndAttack()
+    {
+        _trigger.gameObject.SetActive(false);
+
+        _agent.ChangeState(RhinoState.Walk);
     }
 }
 
@@ -117,7 +193,6 @@ public class RhinoCharge : IState<RhinoBoss>
 
     public void Exit(RhinoBoss agent)
     {
-        agent.EndCharge();
         _trigger.gameObject.SetActive(false);
     }
 

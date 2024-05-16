@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
-  _respawnPoint: {x: 0, y: 3, z: 0}
+  _respawnPoint: {fileID: 0}
   _invincTime: 0.5
 --- !u!114 &4487662790470154088
 MonoBehaviour:
@@ -356,7 +356,7 @@ MonoBehaviour:
     m_Bits: 384
   _attackDuration: 0.2
   _attackDamage: 10
-  _knockbackForce: 500
+  _knockbackForce: 400
   _sprite: {fileID: 127080647}
 --- !u!1 &4487662791082901456
 GameObject:

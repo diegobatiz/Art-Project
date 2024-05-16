@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 639afdc59871baa45884b68cc32c6c59, type: 3}
   m_Name: SlowBossMove
   m_EditorClassIdentifier: 
-  MaxSpeed: 1.7
-  Acceleration: 0.3
-  AccelAmount: 8.823529
-  Deceleration: 1
-  DecelAmount: 29.411764
+  MaxSpeed: 1
+  Acceleration: 0.2
+  AccelAmount: 10
+  Deceleration: 0.1
+  DecelAmount: 5

@@ -6,7 +6,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
 {
     private float _health;
     [SerializeField] private float _maxHealth;
-    [SerializeField] private Vector3 _respawnPoint;
+    [SerializeField] private Transform _respawnPoint;
     [SerializeField] private float _invincTime;
 
     private bool _wasDamaged;
@@ -50,7 +50,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
     public void Death()
     {
         _health = _maxHealth;
-        transform.position = _respawnPoint;
+        transform.position = _respawnPoint.position;
     }
 
     private void ResetTimer()

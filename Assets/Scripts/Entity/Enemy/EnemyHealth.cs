@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour, IHealth
 {
-    [SerializeField] private float _maxHealth;
+    public float KnockbackMultiplier = 1.0f;
+    public float MaxHealth;
     private float _health;
 
     public event Action<float> OnDamaged;
+    public event Action OnDeath;
 
     void Awake()
     {
-        _health = _maxHealth;
+        _health = MaxHealth;
     }
 
     public bool Damage(float amt)
@@ -27,6 +29,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
 
     public void Death()
     {
+        OnDeath?.Invoke();
         gameObject.SetActive(false);
     }
 }

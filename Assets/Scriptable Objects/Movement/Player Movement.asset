@@ -15,5 +15,5 @@ MonoBehaviour:
   MaxSpeed: 6
   Acceleration: 1
   AccelAmount: 8.333333
-  Deceleration: 3
-  DecelAmount: 25
+  Deceleration: 1
+  DecelAmount: 8.333333

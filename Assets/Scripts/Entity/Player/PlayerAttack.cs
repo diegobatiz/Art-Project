@@ -59,8 +59,13 @@ public class PlayerAttack : MonoBehaviour
                     _knockbackDir = 1f;
                 }
 
-                collision.attachedRigidbody?.AddForce(new Vector2(_knockbackDir * _knockbackForce, 0));
-
+                if (damageable.Equals(typeof(EnemyHealth)))
+                {
+                    EnemyHealth enemy = collision.GetComponent<EnemyHealth>();
+                    Debug.Log("YOOO");
+                    float knockBack = enemy.KnockbackMultiplier;
+                    collision.attachedRigidbody?.AddForce(new Vector2(_knockbackDir * _knockbackForce * knockBack, 0));
+                }
             }
 
             _timer.Tick(Time.deltaTime);        

@@ -10,6 +10,7 @@ public class Door : MonoBehaviour
     private float _pos = 0;
 
     private bool _closeDoor;
+    private bool _openDoor;
 
     private void Awake()
     {
@@ -24,16 +25,25 @@ public class Door : MonoBehaviour
             _pos += Time.deltaTime / _duration;
             transform.localPosition = Vector3.Lerp(_startPoint, _endPoint, _pos);
         }
+        else if (_openDoor && transform.position != _startPoint)
+        {
+            _pos += Time.deltaTime / _duration;
+            transform.localPosition = Vector3.Lerp(_endPoint, _startPoint, _pos);
+        }
     }
 
     public void Open()
     {
-        
+        _pos = 0;
+        _closeDoor = false;
+        _openDoor = true;
     }
 
     public void Close()
     {
+        _pos = 0;
         _closeDoor = true;
+        _openDoor = false;
         Debug.Log("closing door");
     }
 }

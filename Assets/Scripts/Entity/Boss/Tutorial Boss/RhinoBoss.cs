@@ -22,6 +22,7 @@ public class RhinoBoss : MonoBehaviour, IBoss
 
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private EnemyMovement _movement;
+    [SerializeField] private EnemyHealth _health;
     [SerializeField] private MovementData _chargeData;
     [SerializeField] private MovementData _walkData;
 
@@ -53,6 +54,8 @@ public class RhinoBoss : MonoBehaviour, IBoss
         _stateMachine.AddState<RhinoCharge>();
         _stateMachine.AddState<RhinoShockwave>();
 
+        _health.OnDeath += RhinoDead;
+
         ChangeState(RhinoState.None);
     }
 
@@ -73,6 +76,18 @@ public class RhinoBoss : MonoBehaviour, IBoss
 
         _currentState = state;
         _stateMachine.ChangeState((int)_currentState);
+    }
+
+    private void RhinoDead()
+    {
+        //play an animation here
+        _leftDoor.Open();
+        _rightDoor.Open();
+    }
+
+    public RhinoState GetLastState()
+    {
+        return (RhinoState)_stateMachine.GetLastState();
     }
 
     public void ShowHealthBar()
@@ -98,9 +113,19 @@ public class RhinoBoss : MonoBehaviour, IBoss
         return _player.transform.position;
     }
 
+    public void SetDirecton(int direction)
+    {
+        _movement.SetDirection(direction);
+    }
+
     public BoxCollider2D GetAttackTrigger(int trigger)
     {
         return _attackTrigger[trigger];
+    }
+
+    public Rigidbody2D GetRB()
+    {
+        return _rb;
     }
 
     public void StartShockwave()
@@ -122,11 +147,13 @@ public class RhinoBoss : MonoBehaviour, IBoss
 
     public void EndCharge()
     {
+        _movement.CanWalk = false;
         _movement.ChangeMoveData(_walkData);
         _movement.OnHitWall -= EndCharge;
 
         float knockbackX = _knockBack.x * _movement.GetDir() * -1f;
-        _rb.AddForce(_knockBack.x * _movement/, );
+        _rb.velocity = Vector2.zero;
+        _rb.AddForce(new Vector2(knockbackX, _knockBack.y));
 
         ChangeState(RhinoState.Walk);
     }

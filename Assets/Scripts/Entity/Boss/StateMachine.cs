@@ -13,6 +13,7 @@ public class StateMachine<AgentType> where AgentType : class
 {
     protected AgentType _agent;
     protected IState<AgentType> _currentState = null;
+    protected IState<AgentType> _lastState = null;
     protected List<IState<AgentType>> _states;
     protected int _stateIndex = -1;
     public int CurrentState { get { return _stateIndex; } }
@@ -28,6 +29,18 @@ public class StateMachine<AgentType> where AgentType : class
         _states.Add(new StateType());
     }
 
+    public int GetLastState()
+    {
+        for (int i = 0; i < _states.Count; i++)
+        {
+            if (_lastState == _states[i])
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public void Update(float deltaTime)
     {
         _currentState.Update(_agent, deltaTime);
@@ -38,6 +51,7 @@ public class StateMachine<AgentType> where AgentType : class
         if (_currentState != null)
         {
             _currentState.Exit(_agent);
+            _lastState = _currentState;
         }
 
         _currentState = _states[index];

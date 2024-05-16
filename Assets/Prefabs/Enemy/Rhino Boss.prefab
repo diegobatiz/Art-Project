@@ -46,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.03373976}
+  m_Offset: {x: 0.03459859, y: -0.033432424}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -57,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.9325205}
+  m_Size: {x: 0.73643637, y: 0.79817617}
   m_EdgeRadius: 0
 --- !u!114 &158808266158241550
 MonoBehaviour:
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 958849921012446759}
   - component: {fileID: 8691491066401888423}
   - component: {fileID: 3081234363773322589}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Charge Attack Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,8 +101,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3202540615664571791}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6241, y: -0.0626, z: -0.019549748}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.6196, y: -0.0461, z: -0.019549748}
+  m_LocalScale: {x: 0.45442924, y: 0.64556587, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5699631630037930564}
@@ -184,7 +184,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.555084, y: 1.59808}
   m_EdgeRadius: 0
 --- !u!114 &3081234363773322589
 MonoBehaviour:
@@ -322,7 +322,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f8e06fc59645374c82c2824f94f8757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 200
+  KnockbackMultiplier: 0.2
+  MaxHealth: 400
 --- !u!114 &3644628775627497515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,7 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 5572807414457009422}
-  _moveData: {fileID: 11400000, guid: bf70f6d2de007f44299c353a498d08cf, type: 2}
+  _moveData: {fileID: 11400000, guid: fda99f362e001de488df368dbc283d1c, type: 2}
   <CanWalk>k__BackingField: 0
   _direction: 1
   _destroyOnTouch: 0
@@ -352,7 +353,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d0c9f72e579734da46faf0e58b16fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _knockBack: {x: 100, y: 100}
+  _rb: {fileID: 5572807414457009422}
   _movement: {fileID: 3644628775627497515}
+  _health: {fileID: 8886544621386593518}
   _chargeData: {fileID: 11400000, guid: d9a3631f5fabdd742a02dc1bcbcc7fdd, type: 2}
   _walkData: {fileID: 11400000, guid: fda99f362e001de488df368dbc283d1c, type: 2}
   _leftDoor: {fileID: 0}
@@ -362,8 +366,8 @@ MonoBehaviour:
   - {fileID: 6749180441567967297}
   - {fileID: 8691491066401888423}
   shockWave: {fileID: 6779464825160414131, guid: 6a445cd3aa759a44083253f5ffa80ec1, type: 3}
-  <MaxWalkTime>k__BackingField: 2
-  <MinWalkTime>k__BackingField: 1
+  <MaxWalkTime>k__BackingField: 4
+  <MinWalkTime>k__BackingField: 2
 --- !u!1 &5083712853423580231
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,7 +548,7 @@ GameObject:
   - component: {fileID: 1926179717341170429}
   - component: {fileID: 6749180441567967297}
   - component: {fileID: 2214363236185065982}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Short Attack Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -642,7 +646,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.555084, y: 2.475472}
   m_EdgeRadius: 0
 --- !u!114 &2214363236185065982
 MonoBehaviour:
