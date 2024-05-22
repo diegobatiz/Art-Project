@@ -83,6 +83,7 @@ public class RhinoBoss : MonoBehaviour, IBoss
         //play an animation here
         _leftDoor.Open();
         _rightDoor.Open();
+        _bossHealthbar.gameObject.SetActive(false);
     }
 
     public RhinoState GetLastState()

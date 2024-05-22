@@ -6,9 +6,13 @@ public class CameraManager : MonoBehaviour
 {
     [SerializeField] private Transform _player;
     [SerializeField] private List<Transform> _extents;
+    [SerializeField] private ZoomManager _zoomManager;
     [SerializeField] private float _smoothTime;
     [SerializeField] private float _zoom;
     [SerializeField] private float _offset;
+
+    //default for zoom is -11
+    //default for offset is 2.3
 
     private List<float> _extentPositions = new List<float>(4);
     private float _aspect;
@@ -40,8 +44,8 @@ public class CameraManager : MonoBehaviour
     {
         Vector3 newPos = new Vector3();
         newPos = _player.position;
-        newPos.z = _zoom;
-        newPos.y += _offset;
+        newPos.z = _zoomManager.GetCameraZoom();
+        newPos.y += _zoomManager.GetCameraOffset();
 
         if (newPos.y >= _extentPositions[0])
         {
