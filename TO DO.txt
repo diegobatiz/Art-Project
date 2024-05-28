@@ -1,0 +1,9 @@
+2 Cameras.
+3d camera for the rocks and stuff
+2d camera for the player and the wall
+
+make 2d camera the base camera
+
+make 3d camera the overlay camera
+
+adjust the clipping plane of the camera as the camera changes distance
