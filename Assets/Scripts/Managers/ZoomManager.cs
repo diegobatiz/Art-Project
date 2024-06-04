@@ -70,9 +70,9 @@ public class ZoomManager : MonoBehaviour
         _compareCheckpoint = FindCloser(_nextCheckpoint, _lastCheckpoint);
 
         float totalDistance = Vector2.Distance(_compareCheckpoint.transform.position, _currentCheckpoint.transform.position);
-        Debug.Log(totalDistance);
+       // Debug.Log(totalDistance);
         float playerDistance = Vector2.Distance(_compareCheckpoint.transform.position, _player.position);
-        Debug.Log(playerDistance);
+        //Debug.Log(playerDistance);
         _t = Mathf.Clamp01(playerDistance/totalDistance);
 
         if (_compareCheckpoint == _nextCheckpoint)
