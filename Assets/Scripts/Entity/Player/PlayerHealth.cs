@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
     [SerializeField] private float _maxHealth;
     [SerializeField] private Transform _respawnPoint;
     [SerializeField] private Rigidbody2D _rb2d;
-    [SerializeField] private float _invincTime;
+    [field:SerializeField] public float InvincTime { get; private set; }
     [SerializeField] private float _noMoveTime;
     [SerializeField] private float _startFreezeTime;
     [SerializeField] private float _freezeTime;
@@ -31,7 +31,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
     {
         _health = _maxHealth;
 
-        _invincibilityTimer = new Timer(_invincTime);
+        _invincibilityTimer = new Timer(InvincTime);
         _invincibilityTimer.OnTimerEnd += ResetInvincTimer;
 
         _noMoveTimer = new Timer(_noMoveTime);
