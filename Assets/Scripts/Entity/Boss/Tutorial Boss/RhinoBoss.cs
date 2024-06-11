@@ -34,6 +34,7 @@ public class RhinoBoss : MonoBehaviour, IBoss
     [SerializeField] private List<BoxCollider2D> _attackTrigger;
 
     [SerializeField] private GameObject shockWave;
+    [SerializeField] private MainLight _light;
 
     [field: SerializeField]
     public float MaxWalkTime { get; private set; }
@@ -84,6 +85,7 @@ public class RhinoBoss : MonoBehaviour, IBoss
         _leftDoor.Open();
         _rightDoor.Open();
         _bossHealthbar.gameObject.SetActive(false);
+        _light.MakeLightNormal();
     }
 
     public RhinoState GetLastState()
