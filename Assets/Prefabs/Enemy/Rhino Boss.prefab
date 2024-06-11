@@ -101,7 +101,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3202540615664571791}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6196, y: -0.0461, z: -0.019549748}
+  m_LocalPosition: {x: 0.6196, y: -0.0461, z: 0}
   m_LocalScale: {x: 0.45442924, y: 0.64556587, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -235,7 +235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3644628775627497513}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.45, y: 18.74, z: 0.045319}
+  m_LocalPosition: {x: 0, y: 0, z: -0.68}
   m_LocalScale: {x: 3.4220598, y: 2.475472, z: 2.3181374}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -393,7 +393,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5083712853423580231}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.375, y: 0.256, z: -0.019549748}
+  m_LocalPosition: {x: 0.375, y: 0.256, z: 0}
   m_LocalScale: {x: 0.08440822, y: 0.11971455, z: 0.5190806}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -547,7 +547,7 @@ GameObject:
   - component: {fileID: 193364632226729553}
   - component: {fileID: 1926179717341170429}
   - component: {fileID: 6749180441567967297}
-  - component: {fileID: 2214363236185065982}
+  - component: {fileID: 5611959271403189836}
   m_Layer: 9
   m_Name: Short Attack Trigger
   m_TagString: Untagged
@@ -563,7 +563,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8769781383762955544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5233, y: 0.2035, z: -0.019549748}
+  m_LocalPosition: {x: 0.5233, y: 0.2035, z: 0}
   m_LocalScale: {x: 0.49095786, y: 1.2285868, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -648,7 +648,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.555084, y: 2.475472}
   m_EdgeRadius: 0
---- !u!114 &2214363236185065982
+--- !u!114 &5611959271403189836
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -657,9 +657,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8769781383762955544}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c67b79fb979091d428db773e6ed3e9b2, type: 3}
+  m_Script: {fileID: 11500000, guid: c844d0756f1a4b44e8184aff8118ad2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collider: {fileID: 6749180441567967297}
+  _mask:
+    serializedVersion: 2
+    m_Bits: 64
   _damage: 20
   _knockbackForce: 2000
   _airKnockbackForce: 1000

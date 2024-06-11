@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMovement : Movement
@@ -7,7 +6,23 @@ public class EnemyMovement : Movement
     [field:SerializeField] public bool CanWalk { get; set; } = true;
     [SerializeField] private float _direction = 1f;
     [SerializeField] private bool _destroyOnTouch = false;
+
+    [SerializeField] private Transform _rayPoint;
+    [SerializeField] private LayerMask _mask;
+    [SerializeField] private bool _makeCheckEdges;
+    private CheckGround _edgeCheck;
+
     public Action OnHitWall;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        if (_makeCheckEdges)
+        {
+            _edgeCheck = new CheckGround(0.2f, _rayPoint, _mask);
+        }
+    }
 
     public int GetDir()
     {
@@ -29,6 +44,17 @@ public class EnemyMovement : Movement
         {
             return 0.0f;
         }
+
+        if (_makeCheckEdges)
+        {
+            if (_edgeCheck.IsOverEdge())
+            {
+                _direction *= -1f;
+
+                Flip(_direction);
+            }
+        }
+
         return _direction;
     }
 
@@ -58,7 +84,7 @@ public class EnemyMovement : Movement
         }
         else
         {
-            transform.rotation = Quaternion.Euler(0, -180, 0);
+            transform.rotation = Quaternion.Euler(0, 180, 0);
         }
     }
 
