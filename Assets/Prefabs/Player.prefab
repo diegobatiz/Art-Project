@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 1873899001}
   - component: {fileID: 1873899000}
   m_Layer: 0
-  m_Name: Quad
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -246,6 +246,7 @@ GameObject:
   - component: {fileID: 4487662791670011898}
   - component: {fileID: 1217175707}
   - component: {fileID: 4487662790470154088}
+  - component: {fileID: 4487662790470154093}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -434,7 +435,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 100
   _respawnPoint: {fileID: 0}
-  _invincTime: 0.5
+  _rb2d: {fileID: 4487662791670011892}
+  <InvincTime>k__BackingField: 2
+  _noMoveTime: 0.5
+  _startFreezeTime: 0.1
+  _freezeTime: 0.2
 --- !u!114 &4487662790470154088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,9 +458,29 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 384
   _attackDuration: 0.2
-  _attackDamage: 10
+  _attackDamage: 5
   _knockbackForce: 400
   _sprite: {fileID: 127080647}
+--- !u!114 &4487662790470154093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148290759917208542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da873216a42dc0247b58f328584a5108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerHealth: {fileID: 1217175707}
+  _playerMat: {fileID: 2100000, guid: 86331c015172825419bc0350a07aa4b7, type: 2}
+  _flashReps: 5
+  _emissiveHigh: {r: 0, g: 0, b: 0, a: 1}
+  _emissiveLow: {r: 0, g: 0, b: 0, a: 1}
+  _colorHigh: {r: 1, g: 1, b: 1, a: 1}
+  _colorLow: {r: 0, g: 0, b: 0, a: 1}
+  _flash: 0
 --- !u!1 &4487662791082901456
 GameObject:
   m_ObjectHideFlags: 0

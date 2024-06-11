@@ -122,6 +122,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 684185218, guid: ce915ec302eac1f4a9ee09c1b7f73db2, type: 3}
+      propertyPath: MaxHealth
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 1596915681, guid: ce915ec302eac1f4a9ee09c1b7f73db2, type: 3}
       propertyPath: m_Offset.x
       value: 0.81
@@ -141,6 +145,10 @@ PrefabInstance:
     - target: {fileID: 742104035520394063, guid: ce915ec302eac1f4a9ee09c1b7f73db2, type: 3}
       propertyPath: m_Offset.y
       value: -0.0016416311
+      objectReference: {fileID: 0}
+    - target: {fileID: 1972590644569943059, guid: ce915ec302eac1f4a9ee09c1b7f73db2, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3767948854903566376, guid: ce915ec302eac1f4a9ee09c1b7f73db2, type: 3}
       propertyPath: m_RootOrder
