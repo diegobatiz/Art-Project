@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class StartGame : MonoBehaviour
 {
+    [SerializeField] private int _sceneToLoad;
+
     public void GameStart()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        int sceneToLoad = currentScene.buildIndex + 1;
-        SceneManager.LoadScene(sceneToLoad);
+        SceneManager.LoadScene(_sceneToLoad);
     }
 }

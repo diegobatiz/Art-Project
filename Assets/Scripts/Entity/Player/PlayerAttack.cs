@@ -22,7 +22,7 @@ public class PlayerAttack : MonoBehaviour
     private float _angle;
     private float _attackButton;
     private bool _canAttack = true;
-    private List<Collider2D> _hitObjects;
+    private List<Rigidbody2D> _hitObjects;
     private float _knockbackDir;
     private Timer _timer;
 
@@ -30,7 +30,7 @@ public class PlayerAttack : MonoBehaviour
     {
         _timer = new Timer(_attackDuration);
         _timer.OnTimerEnd += EndAttack;
-        _hitObjects = new List<Collider2D>();
+        _hitObjects = new List<Rigidbody2D>();
     }
 
     private void Update()
@@ -41,16 +41,17 @@ public class PlayerAttack : MonoBehaviour
 
             foreach (var collision in collisions)
             {
-                if (_hitObjects.Contains(collision))
+                if (_hitObjects.Contains(collision.attachedRigidbody))
                 {
                     continue;
                 }
 
-                _hitObjects.Add(collision);
+                _hitObjects.Add(collision.attachedRigidbody);
 
                 IHealth damageable = collision.GetComponent<IHealth>();
 
                 damageable.Damage(_attackDamage);
+                Debug.Log($"Hit for { _attackDamage} damage");
 
                 Vector3 collisionPoint = collision.ClosestPoint(transform.position);
                 Vector3 collisionNormal = transform.position - collisionPoint;
@@ -67,8 +68,8 @@ public class PlayerAttack : MonoBehaviour
                 Debug.Log("YOOO");
                 float knockBack = enemy.KnockbackMultiplier;
                 collision.attachedRigidbody?.AddForce(new Vector2(_knockbackDir * _knockbackForce * knockBack, 0));
-
             }
+
             _timer.Tick(Time.deltaTime);
         }
 

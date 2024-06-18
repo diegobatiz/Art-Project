@@ -26,9 +26,9 @@ public class ZoomManager : MonoBehaviour
         if (IsInRange(_nextCheckpoint.transform.position, _player.position))
         {
             _lastCheckpoint = _currentCheckpoint;
-            Debug.Log($"{_lastCheckpoint.gameObject.name}");
+            //Debug.Log($"{_lastCheckpoint.gameObject.name}");
             _currentCheckpoint = _nextCheckpoint;
-            Debug.Log($"{_currentCheckpoint.gameObject.name}");
+            //Debug.Log($"{_currentCheckpoint.gameObject.name}");
 
             for (int i = 0; i < _zoomCheckpoints.Count; i++)
             {
@@ -37,7 +37,7 @@ public class ZoomManager : MonoBehaviour
                     if (_zoomCheckpoints[i + 1] != null)
                     {
                         _nextCheckpoint = _zoomCheckpoints[i + 1];
-                        Debug.Log($"{_nextCheckpoint.gameObject.name}");
+                        //Debug.Log($"{_nextCheckpoint.gameObject.name}");
                     }
                     break;
                 }
@@ -46,9 +46,9 @@ public class ZoomManager : MonoBehaviour
         else if (IsInRange(_lastCheckpoint.transform.position, _player.position))
         {
             _nextCheckpoint = _currentCheckpoint;
-            Debug.Log($"{_nextCheckpoint.gameObject.name}");
+            //Debug.Log($"{_nextCheckpoint.gameObject.name}");
             _currentCheckpoint = _lastCheckpoint;
-            Debug.Log($"{_currentCheckpoint.gameObject.name}");
+           // Debug.Log($"{_currentCheckpoint.gameObject.name}");
 
             for (int i = 0; i < _zoomCheckpoints.Count; i++)
             {
@@ -57,7 +57,7 @@ public class ZoomManager : MonoBehaviour
                     if (_zoomCheckpoints[i - 1] != null)
                     {
                         _lastCheckpoint = _zoomCheckpoints[i - 1];
-                        Debug.Log($"{_lastCheckpoint.gameObject.name}");
+                        //Debug.Log($"{_lastCheckpoint.gameObject.name}");
                     }
                     break;
                 }
