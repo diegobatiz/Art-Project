@@ -5,7 +5,6 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     [SerializeField] private Transform _player;
-    [SerializeField] private Transform _spotLight;
     [SerializeField] private List<Transform> _extents;
     [SerializeField] private ZoomManager _zoomManager;
     [SerializeField] private float _smoothTime;
@@ -67,6 +66,5 @@ public class CameraManager : MonoBehaviour
         }
 
         transform.position = Vector3.SmoothDamp(transform.position, newPos, ref _velocity, _smoothTime);
-        _spotLight.position = new Vector3(transform.position.x, transform.position.y, -15.7f);
     }
 }

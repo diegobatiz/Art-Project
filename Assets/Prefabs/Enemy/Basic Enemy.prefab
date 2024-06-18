@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   KnockbackMultiplier: 1
-  MaxHealth: 15
+  MaxHealth: 30
 --- !u!1 &7414836066794815141
 GameObject:
   m_ObjectHideFlags: 0

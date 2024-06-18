@@ -38,7 +38,7 @@ public class EnemyAI
         if (raycast.collider != null)
         {
             float colliderPos = raycast.collider.ClosestPoint(_enemyPos.position).x;
-            PlayerDirection = colliderPos > _raycastPoint.position.x ? 1 : -1;
+            PlayerDirection = colliderPos > _enemyPos.position.x ? 1 : -1;
 
             return true;
         }

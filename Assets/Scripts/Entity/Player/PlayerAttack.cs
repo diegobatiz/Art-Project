@@ -8,6 +8,7 @@ public class PlayerAttack : MonoBehaviour
     public bool IsAttacking { get; private set; } = false;
 
     [SerializeField] private Transform _attackPoint;
+    [SerializeField] private Transform _rotatePoint;
     [SerializeField] private Vector2 _attackSize;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private float _attackDuration;
@@ -17,7 +18,10 @@ public class PlayerAttack : MonoBehaviour
     [Header("DEBUG")]
     [SerializeField] private GameObject _sprite;
 
-    private bool _canAttack;
+    private Vector2 _aimInput;
+    private float _angle;
+    private float _attackButton;
+    private bool _canAttack = true;
     private List<Collider2D> _hitObjects;
     private float _knockbackDir;
     private Timer _timer;
@@ -33,9 +37,9 @@ public class PlayerAttack : MonoBehaviour
     {
         if (IsAttacking)
         {
-            Collider2D[] collisions = Physics2D.OverlapCapsuleAll(_attackPoint.position, _attackSize, CapsuleDirection2D.Horizontal, 0, _layerMask);
+            Collider2D[] collisions = Physics2D.OverlapCapsuleAll(_attackPoint.position, _attackSize, CapsuleDirection2D.Horizontal, _angle, _layerMask);
 
-            foreach(var collision in collisions)
+            foreach (var collision in collisions)
             {
                 if (_hitObjects.Contains(collision))
                 {
@@ -59,32 +63,38 @@ public class PlayerAttack : MonoBehaviour
                     _knockbackDir = 1f;
                 }
 
-                if (damageable.Equals(typeof(EnemyHealth)))
-                {
-                    EnemyHealth enemy = collision.GetComponent<EnemyHealth>();
-                    Debug.Log("YOOO");
-                    float knockBack = enemy.KnockbackMultiplier;
-                    collision.attachedRigidbody?.AddForce(new Vector2(_knockbackDir * _knockbackForce * knockBack, 0));
-                }
-            }
+                EnemyHealth enemy = collision.GetComponent<EnemyHealth>();
+                Debug.Log("YOOO");
+                float knockBack = enemy.KnockbackMultiplier;
+                collision.attachedRigidbody?.AddForce(new Vector2(_knockbackDir * _knockbackForce * knockBack, 0));
 
-            _timer.Tick(Time.deltaTime);        
+            }
+            _timer.Tick(Time.deltaTime);
+        }
+
+        if (_attackButton == 0.0f)
+        {
+            _canAttack = true;
         }
     }
 
     public void Attack(InputAction.CallbackContext context)
     {
-        float attack = context.ReadValue<float>();
-
-        if (attack == 0.0f)
-        {
-            _canAttack = true;
-        }
+        _attackButton = context.ReadValue<float>();
 
         if (IsAttacking || !_canAttack)
         {
             return;
         }
+        if (transform.localScale.x != 1f && _aimInput.y != 0f && _aimInput.x != 0f)
+        {
+            _angle = Mathf.Atan2(-_aimInput.y, -_aimInput.x);
+        }
+        else
+        {
+            _angle = Mathf.Atan2(_aimInput.y, _aimInput.x);
+        }
+        _rotatePoint.transform.eulerAngles = new Vector3(0, 0, Mathf.Rad2Deg * _angle);
 
         _sprite.SetActive(true);
         IsAttacking = true;
@@ -97,5 +107,10 @@ public class PlayerAttack : MonoBehaviour
         IsAttacking = false;
         _timer.ResetTimer();
         _hitObjects.Clear();
+    }
+
+    public void Aim(InputAction.CallbackContext context)
+    {
+        _aimInput = context.ReadValue<Vector2>();
     }
 }

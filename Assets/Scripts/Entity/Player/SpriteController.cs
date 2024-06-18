@@ -78,6 +78,7 @@ public class SpriteController : MonoBehaviour
     private void StartFlash(float damage)
     {
         _flash = true;
+        _invincTimer.ResetTimer();
     }
 
     private void EndFlash()

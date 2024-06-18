@@ -28,7 +28,7 @@ public class RhinoWalk : IState<RhinoBoss>
 
             _hasBeenEntered = true;
 
-            _restTimer = new Timer(4);
+            _restTimer = new Timer(2);
             _restTimer.OnTimerEnd += StartWalk;
         }
         else

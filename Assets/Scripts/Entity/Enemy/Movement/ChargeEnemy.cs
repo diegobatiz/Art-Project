@@ -42,6 +42,7 @@ public class ChargeEnemy : Movement
             _pauseTimer.ResetTimer();
             _startPause = true;
             Direction = _ai.PlayerDirection;
+            Flip(Direction);
 
             return 0;
         }
@@ -93,10 +94,9 @@ public class ChargeEnemy : Movement
         if (collision.gameObject.CompareTag("Wall") && !_startCharge)
         {
             Direction *= -1f;
-
             Flip(Direction);
         }
-        else if (_startCharge)
+        else if (_startCharge && !collision.gameObject.CompareTag("Player"))
         {
             _chargeTimer.EndTimer();
             _rb.velocity = Vector3.zero;
