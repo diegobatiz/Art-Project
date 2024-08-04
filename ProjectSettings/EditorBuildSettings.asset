@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndScene.unity
     guid: 14f312cbdcff25743aa60697cb920e68
+  - enabled: 1
+    path: Assets/Scenes/Rooms/MainHub.unity
+    guid: 9c70ba2439449fe46ae2b38fd01e074c
+  - enabled: 1
+    path: Assets/Scenes/Rooms/Room1.unity
+    guid: f4777fc8add9c744e8092e155df03503
   m_configObjects: {}

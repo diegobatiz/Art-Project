@@ -11,10 +11,10 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private float _zoom;
     [SerializeField] private float _offset;
 
-    public Vector3 newPos;
+    [SerializeField] private bool _updateHeight = true;
+    [SerializeField] private float _setYPos = 2.37f;
 
-    //default for zoom is -11
-    //default for offset is 2.3
+    public Vector3 newPos;
 
     private List<float> _extentPositions = new List<float>(4);
     private float _aspect;
@@ -46,6 +46,12 @@ public class CameraManager : MonoBehaviour
     {
         newPos = new Vector3();
         newPos = _player.position;
+
+        if (!_updateHeight)
+        {
+            newPos.y = _setYPos;
+        }
+
         if (_zoomManager != null)
         {
             newPos.z = _zoomManager.GetCameraZoom();

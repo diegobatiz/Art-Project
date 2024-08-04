@@ -23,6 +23,11 @@ public class Player : MonoBehaviour
         _health.OnDamaged += action;
     }
 
+    public void OnDead(Action action)
+    {
+        _health.OnDead += action;
+    }
+
     public static void PauseMovement()
     {
         PlayerMovement.PauseMovement = true;

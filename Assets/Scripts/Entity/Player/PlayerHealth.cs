@@ -26,6 +26,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
     private Vector2 _lastVelocity = Vector2.zero;
 
     public event Action<float> OnDamaged;
+    public event Action OnDead;
 
     private void Awake()
     {
@@ -94,8 +95,10 @@ public class PlayerHealth : MonoBehaviour, IHealth
 
     public void Death()
     {
-        _health = _maxHealth;
-        transform.position = _respawnPoint.position;
+        Player.PauseMovement();
+        //play death animation
+
+        OnDead?.Invoke();
     }
 
     private void ResetInvincTimer()
