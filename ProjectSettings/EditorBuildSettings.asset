@@ -18,6 +18,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Rooms/MainHub.unity
     guid: 9c70ba2439449fe46ae2b38fd01e074c
   - enabled: 1
-    path: Assets/Scenes/Rooms/Room1.unity
+    path: Assets/Scenes/Rooms/1Room1.unity
     guid: f4777fc8add9c744e8092e155df03503
+  - enabled: 1
+    path: Assets/Scenes/Rooms/1Room2.unity
+    guid: c037889c46474f24288b2f924ef18e5c
+  - enabled: 1
+    path: Assets/Scenes/Rooms/1Room3.unity
+    guid: 2e44f6f7e1b580d49a6e839bf1768834
+  - enabled: 1
+    path: Assets/Scenes/Rooms/Mini1.unity
+    guid: af70322a0e594064088749f1a13a11fa
   m_configObjects: {}
