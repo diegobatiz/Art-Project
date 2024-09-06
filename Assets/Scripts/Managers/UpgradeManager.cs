@@ -25,8 +25,8 @@ public class UpgradeManager
         return _instance;
     }
 
-    private Dictionary<ResourceType, int> _currentUpgradeLevel;
-    private Dictionary<ResourceType, UpgradeLevels> _upgradeLevels;
+    private Dictionary<ResourceType, int> _currentUpgradeLevel = new();
+    private Dictionary<ResourceType, UpgradeLevels> _upgradeLevels = new();
     private bool _hasData = false;
 
     public void LoadUpgrades()

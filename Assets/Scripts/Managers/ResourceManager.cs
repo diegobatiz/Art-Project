@@ -19,6 +19,7 @@ public class ResourceManager
     //Singleton Functions
     private ResourceManager()
     {
+        _resources = new Dictionary<ResourceType, uint>();
         _resources.Add(ResourceType.HorseHide, 0);
         _resources.Add(ResourceType.BullHorn, 0);
         _resources.Add(ResourceType.BirdFeather, 0);
@@ -51,6 +52,11 @@ public class ResourceManager
 
         _resources[type] -= amount;
         return true;
+    }
+
+    public uint GetResourceAmount(ResourceType type)
+    {
+        return _resources[type];
     }
 
     public void SaveResources()
