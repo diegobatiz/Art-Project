@@ -15,6 +15,6 @@ public class UpgradeData : MonoBehaviour
     {
         UpgradeManager upMan = UpgradeManager.Get();
 
-        upMan.GetUpgradeLevelData(_upgradeLevels);
+        upMan.SetUpgradeLevelData(_upgradeLevels);
     }
 }

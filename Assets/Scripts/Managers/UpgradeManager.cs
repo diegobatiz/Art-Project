@@ -44,7 +44,7 @@ public class UpgradeManager
 
     }
 
-    public void GetUpgradeLevelData(List<UpgradeLevels> data)
+    public void SetUpgradeLevelData(List<UpgradeLevels> data)
     {
         if  (_hasData)
         {
